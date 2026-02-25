@@ -1,0 +1,144 @@
+{
+  "project_info": {
+    "project_number": "28144494847",
+    "firebase_url": "https://easyconnect-c0ce3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "easyconnect-c0ce3",
+    "storage_bucket": "easyconnect-c0ce3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:c09b5f838e3bd7756c44ca",
+        "android_client_info": {
+          "package_name": "com.betterworld.easyconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:32113a59fd56f4996c44ca",
+        "android_client_info": {
+          "package_name": "com.codecarrots.easyconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:2b88be0904d24ad86c44ca",
+        "android_client_info": {
+          "package_name": "com.codecarrots.korlink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:0d9abef73c8f7efc6c44ca",
+        "android_client_info": {
+          "package_name": "com.codecarrots.korlinks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:aa8cf8b0ff7838956c44ca",
+        "android_client_info": {
+          "package_name": "com.easyconnect.eazyfinds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:00f9da6a5bc867906c44ca",
+        "android_client_info": {
+          "package_name": "com.eazyfind.easyconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28144494847:android:a7b2976c5ba2f8706c44ca",
+        "android_client_info": {
+          "package_name": "com.infycontact.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUJtIvKnuu5yPfOEmRZG1d3Afl8KjCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
