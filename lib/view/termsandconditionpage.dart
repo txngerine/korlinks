@@ -61,6 +61,7 @@ class TermsAndConditionsPage extends StatelessWidget {
               '4. Prohibited Activities',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+            // ignore: prefer_const_constructors
             SizedBox(height: 8),
             Text(
               'Using the app for illegal activities, spamming, or unauthorized access to other accounts is strictly prohibited. The distribution of harmful content, including viruses or malicious software, is not allowed.',
