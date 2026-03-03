@@ -36,6 +36,8 @@ class AddEditContactPage extends StatelessWidget {
         TextEditingController(text: contact?.youtube ?? '');
     TextEditingController websiteController =
         TextEditingController(text: contact?.website ?? ''); // Add this line
+    TextEditingController xcomController =
+        TextEditingController(text: contact?.xcom ?? ''); // new
 
     // FocusNodes for each TextField
     FocusNode nameFocusNode = FocusNode();
@@ -46,6 +48,7 @@ class AddEditContactPage extends StatelessWidget {
     FocusNode facebookFocusNode = FocusNode();
     FocusNode instagramFocusNode = FocusNode();
     FocusNode youtubeFocusNode = FocusNode();
+    FocusNode xcomFocusNode = FocusNode(); // new
     FocusNode websiteFocusNode = FocusNode(); // Add this line
 
     // Reactive custom fields list
@@ -161,6 +164,7 @@ class AddEditContactPage extends StatelessWidget {
           facebook: facebookController.text,
           instagram: instagramController.text,
           youtube: youtubeController.text,
+          xcom: xcomController.text,
           website: websiteController.text,
           isFavorite: false,
         );
@@ -188,6 +192,7 @@ class AddEditContactPage extends StatelessWidget {
           ..facebook = facebookController.text
           ..instagram = instagramController.text
           ..youtube = youtubeController.text
+          ..xcom = xcomController.text
           ..website = websiteController.text;
 
         contactController.editContact(
@@ -204,6 +209,7 @@ class AddEditContactPage extends StatelessWidget {
           facebook: contact!.facebook,
           instagram: contact!.instagram,
           youtube: contact!.youtube,
+          xcom: contact!.xcom,
         );
 
         if (isAdmin) {
@@ -518,7 +524,17 @@ class AddEditContactPage extends StatelessWidget {
                   icon: Bootstrap.youtube,
                   focusNode: youtubeFocusNode,
                   iconColor: Color(0xFFFF0000),
-                  nextFocusNode: null,
+                  nextFocusNode: xcomFocusNode,
+                ),
+                SizedBox(height: 16),
+                _buildCurvedTextField(
+                  context: context,
+                  controller: xcomController,
+                  labelText: 'x.com',
+                  hintText: 'Enter x.com URL or handle',
+                  icon: Icons.link,
+                  focusNode: xcomFocusNode,
+                  nextFocusNode: websiteFocusNode,
                 ),
                 SizedBox(height: 16),
                 _buildCurvedTextField(

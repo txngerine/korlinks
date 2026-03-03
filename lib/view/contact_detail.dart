@@ -505,6 +505,22 @@ if (contact.phoneNumbers.isNotEmpty)
               color: Colors.blueAccent,
             ),
 
+            /// x.com
+            _buildOptionalCard(
+              icon: Icons.link,
+              label: 'x.com',
+              value: contact.xcom,
+              onTap: () {
+                if (contact.xcom != null && contact.xcom!.isNotEmpty) {
+                  final url = contact.xcom!.startsWith('http')
+                      ? contact.xcom!
+                      : 'https://${contact.xcom!}';
+                  OppoFixLauncher.launchCustomURL(Uri.parse(url));
+                }
+              },
+              color: Colors.lightBlue,
+            ),
+
             /// Custom Fields
             if (contact.customFields != null &&
                 contact.customFields!.isNotEmpty)

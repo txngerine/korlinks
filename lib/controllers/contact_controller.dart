@@ -390,6 +390,7 @@ Future<void> fetchContacts() async {
     String? facebook,
     String? instagram,
     String? youtube,
+    String? xcom,
   }) async {
     final updatedContact = contact.copyWith(
       name: name,
@@ -403,6 +404,7 @@ Future<void> fetchContacts() async {
       whatsapp: whatsapp ?? contact.whatsapp,
       instagram: instagram ?? contact.instagram,
       youtube: youtube ?? contact.youtube,
+      xcom: xcom ?? contact.xcom,
       customFields: customFields ?? contact.customFields,
       isSynced: false,
     );

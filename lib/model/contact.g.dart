@@ -34,15 +34,16 @@ class ContactAdapter extends TypeAdapter<Contact> {
       youtube: fields[14] as String?,
       website: fields[16] as String?,
       isSynced: fields[15] as bool,
-      importedFromCsv: fields[17] as bool,
-      isDeleted: fields[18] as bool,
+      xcom: fields[17] as String?,
+      importedFromCsv: fields[18] as bool,
+      isDeleted: fields[19] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Contact obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(20)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -78,8 +79,10 @@ class ContactAdapter extends TypeAdapter<Contact> {
       ..writeByte(16)
       ..write(obj.website)
       ..writeByte(17)
-      ..write(obj.importedFromCsv)
+      ..write(obj.xcom)
       ..writeByte(18)
+      ..write(obj.importedFromCsv)
+      ..writeByte(19)
       ..write(obj.isDeleted);
   }
 
