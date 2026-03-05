@@ -7,7 +7,6 @@
       "name": "korlinks",
       "version": "1.0.3+53",
       "dependencies": [
-        "alphabet_list_view",
         "cloud_firestore",
         "connectivity_plus",
         "csv",
@@ -327,14 +326,6 @@
         "firebase_core_platform_interface",
         "flutter",
         "meta"
-      ]
-    },
-    {
-      "name": "alphabet_list_view",
-      "version": "1.2.0",
-      "dependencies": [
-        "flutter",
-        "flutter_sticky_header"
       ]
     },
     {
@@ -1087,14 +1078,6 @@
       ]
     },
     {
-      "name": "flutter_sticky_header",
-      "version": "0.8.0",
-      "dependencies": [
-        "flutter",
-        "value_layout_builder"
-      ]
-    },
-    {
       "name": "leak_tracker_testing",
       "version": "3.0.2",
       "dependencies": [
@@ -1334,13 +1317,6 @@
         "firebase_core_platform_interface",
         "flutter",
         "meta"
-      ]
-    },
-    {
-      "name": "value_layout_builder",
-      "version": "0.5.0",
-      "dependencies": [
-        "flutter"
       ]
     },
     {
