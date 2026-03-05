@@ -5,7 +5,7 @@
   "packages": [
     {
       "name": "korlinks",
-      "version": "1.0.3+50",
+      "version": "1.0.3+52",
       "dependencies": [
         "alphabet_list_view",
         "cloud_firestore",
@@ -24,6 +24,7 @@
         "in_app_update",
         "path",
         "permission_handler",
+        "scrollable_positioned_list",
         "share_plus",
         "shimmer",
         "url_launcher",
@@ -110,6 +111,14 @@
       "version": "4.0.0",
       "dependencies": [
         "lints"
+      ]
+    },
+    {
+      "name": "scrollable_positioned_list",
+      "version": "0.3.8",
+      "dependencies": [
+        "collection",
+        "flutter"
       ]
     },
     {

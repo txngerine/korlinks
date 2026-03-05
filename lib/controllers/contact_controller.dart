@@ -40,7 +40,7 @@ class ContactController extends GetxController {
   var loadingMore = false.obs;
 
   DocumentSnapshot? lastVisible;
-  final int pageSize = 25; // Start with smaller page size for faster initial load
+  final int pageSize = 20000; // Start with smaller page size for faster initial load
 
   RxSet<Contact> selectedContacts = <Contact>{}.obs;
   RxBool isSelectionMode = false.obs;
@@ -73,11 +73,12 @@ Future<void> fetchContacts() async {
     if (user == null) throw Exception('User not authenticated');
 
     if (hasInternet) {
-      // 🔹 Online: Fetch ALL contacts from Firestore on app open
+      // 🔹 Online: Fetch first page of contacts from Firestore
       Query<Map<String, dynamic>> query =
-          firestore.collection('contacts');
+          firestore.collection('contacts').orderBy('name').limit(pageSize);
 
       final snapshot = await query.get();
+      lastVisible = snapshot.docs.isNotEmpty ? snapshot.docs.last : null;
       final deletedIds = _getLocallyDeletedIds();
       
       // Convert to contacts
@@ -738,6 +739,10 @@ Future<void> unsyncSelectedContacts() async {
         return matches;
       }).toList();
     }
+
+    // Deduplicate
+    final uniqueIds = <String>{};
+    filteredContacts.value = filteredContacts.where((c) => uniqueIds.add(c.id)).toList();
 
     filteredContacts.sort((a, b) => a.name.compareTo(b.name));
 
