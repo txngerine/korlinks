@@ -73,12 +73,11 @@ Future<void> fetchContacts() async {
     if (user == null) throw Exception('User not authenticated');
 
     if (hasInternet) {
-      // 🔹 Online: Fetch first page of contacts from Firestore
+      // 🔹 Online: Fetch ALL contacts from Firestore on app open
       Query<Map<String, dynamic>> query =
-          firestore.collection('contacts').orderBy('name').limit(pageSize);
+          firestore.collection('contacts');
 
       final snapshot = await query.get();
-      lastVisible = snapshot.docs.isNotEmpty ? snapshot.docs.last : null;
       final deletedIds = _getLocallyDeletedIds();
       
       // Convert to contacts
