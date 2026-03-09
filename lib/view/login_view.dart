@@ -142,7 +142,7 @@ class LoginView extends StatelessWidget {
                             'Attempting to log you in...',
                             snackPosition: SnackPosition.BOTTOM,
                             duration: const Duration(seconds: 2),
-                            colorText: Colors.white,
+                            colorText: Colors.black,
                           );
                         } else {
                           Get.snackbar(
@@ -150,7 +150,7 @@ class LoginView extends StatelessWidget {
                             'Please check the form fields and try again.',
                             snackPosition: SnackPosition.BOTTOM,
                             duration: const Duration(seconds: 2),
-                            colorText: Colors.white,
+                            colorText: Colors.black,
                             backgroundColor: Colors.red,
                           );
                         }

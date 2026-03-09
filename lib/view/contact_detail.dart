@@ -51,12 +51,26 @@ class OppoFixLauncher {
 
   static Future<void> launchFacebook(String? profileUrl) async {
     if (profileUrl == null || profileUrl.isEmpty) return;
-    final id = Uri.parse(profileUrl).pathSegments.last;
+    Uri uri;
+    if (profileUrl.startsWith('http')) {
+      uri = Uri.parse(profileUrl);
+    } else {
+      // Assume it's a username
+      uri = Uri.parse('https://www.facebook.com/$profileUrl');
+    }
+    String id;
+    if (uri.pathSegments.isNotEmpty && uri.pathSegments.last != 'profile.php') {
+      id = uri.pathSegments.last;
+    } else if (uri.queryParameters.containsKey('id')) {
+      id = uri.queryParameters['id']!;
+    } else {
+      id = uri.pathSegments.last; // fallback
+    }
     try {
       await platform.invokeMethod('launchFacebook', {'id': id});
     } catch (e) {
       print('Facebook intent failed: $e');
-      await launchCustomURL(Uri.parse(profileUrl));
+      await launchCustomURL(uri);
     }
   }
 

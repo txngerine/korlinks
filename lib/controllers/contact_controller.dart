@@ -321,12 +321,13 @@ Future<void> fetchContacts() async {
 
       filterContacts();
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to load more contacts: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 3),
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Failed to load more contacts: ${e.toString()}',
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   duration: Duration(seconds: 3),
+      // );
+      print('Error loading more contacts: $e');
     } finally {
       loadingMore.value = false;
     }
