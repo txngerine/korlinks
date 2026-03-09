@@ -50,29 +50,40 @@ class OppoFixLauncher {
   }
 
   static Future<void> launchFacebook(String? profileUrl) async {
-    if (profileUrl == null || profileUrl.isEmpty) return;
-    Uri uri;
-    if (profileUrl.startsWith('http')) {
-      uri = Uri.parse(profileUrl);
-    } else {
-      // Assume it's a username
-      uri = Uri.parse('https://www.facebook.com/$profileUrl');
-    }
-    String id;
-    if (uri.pathSegments.isNotEmpty && uri.pathSegments.last != 'profile.php') {
-      id = uri.pathSegments.last;
-    } else if (uri.queryParameters.containsKey('id')) {
-      id = uri.queryParameters['id']!;
-    } else {
-      id = uri.pathSegments.last; // fallback
-    }
-    try {
-      await platform.invokeMethod('launchFacebook', {'id': id});
-    } catch (e) {
-      print('Facebook intent failed: $e');
-      await launchCustomURL(uri);
-    }
+  if (profileUrl == null || profileUrl.isEmpty) return;
+
+  Uri uri;
+
+  if (profileUrl.startsWith('http')) {
+    uri = Uri.parse(profileUrl);
+  } else {
+    uri = Uri.parse('https://facebook.com/$profileUrl');
   }
+
+  String id = '';
+
+  /// Case 1: facebook.com/profile.php?id=123
+  if (uri.queryParameters.containsKey('id')) {
+    id = uri.queryParameters['id']!;
+  }
+
+  /// Case 2: facebook.com/username
+  else if (uri.pathSegments.isNotEmpty) {
+    id = uri.pathSegments.first;
+  }
+
+  if (id.isEmpty) {
+    await launchCustomURL(uri);
+    return;
+  }
+
+  try {
+    await platform.invokeMethod('launchFacebook', {'id': id});
+  } catch (e) {
+    print('Facebook intent failed: $e');
+    await launchCustomURL(uri);
+  }
+}
 
   static Future<void> launchInstagram(String? usernameOrUrl) async {
     if (usernameOrUrl == null || usernameOrUrl.isEmpty) return;
