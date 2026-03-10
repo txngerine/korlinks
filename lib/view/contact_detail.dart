@@ -49,42 +49,40 @@ class OppoFixLauncher {
     await launchCustomURL(Uri(scheme: 'mailto', path: email));
   }
 
-  static Future<void> launchFacebook(String? profileUrl) async {
-  if (profileUrl == null || profileUrl.isEmpty) return;
+static Future<void> launchFacebook(String? profileUrl) async {
+  if (profileUrl == null || profileUrl.trim().isEmpty) return;
 
-  Uri uri;
+  Uri webUri;
 
   if (profileUrl.startsWith('http')) {
-    uri = Uri.parse(profileUrl);
+    webUri = Uri.parse(profileUrl);
   } else {
-    uri = Uri.parse('https://facebook.com/$profileUrl');
+    webUri = Uri.parse('https://facebook.com/$profileUrl');
   }
 
-  String id = '';
-
-  /// Case 1: facebook.com/profile.php?id=123
-  if (uri.queryParameters.containsKey('id')) {
-    id = uri.queryParameters['id']!;
-  }
-
-  /// Case 2: facebook.com/username
-  else if (uri.pathSegments.isNotEmpty) {
-    id = uri.pathSegments.first;
-  }
-
-  if (id.isEmpty) {
-    await launchCustomURL(uri);
-    return;
-  }
+  final Uri appUri =
+      Uri.parse('fb://facewebmodal/f?href=${webUri.toString()}');
 
   try {
-    await platform.invokeMethod('launchFacebook', {'id': id});
+    if (await canLaunchUrl(appUri)) {
+      await launchUrl(
+        appUri,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      await launchUrl(
+        webUri,
+        mode: LaunchMode.externalApplication,
+      );
+    }
   } catch (e) {
-    print('Facebook intent failed: $e');
-    await launchCustomURL(uri);
+    print('Facebook launch error: $e');
+    await launchUrl(
+      webUri,
+      mode: LaunchMode.externalApplication,
+    );
   }
 }
-
   static Future<void> launchInstagram(String? usernameOrUrl) async {
     if (usernameOrUrl == null || usernameOrUrl.isEmpty) return;
 
