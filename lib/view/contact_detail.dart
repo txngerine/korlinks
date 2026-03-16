@@ -171,23 +171,29 @@ class _ContactDetailViewState extends State<ContactDetailView> {
 
   Future<void> _deleteContact() async {
     final role = authController.userRole.value;
+    final isAuthorized = role == 'admin' || 
+        (role == 'user' && contact.ownerId == authController.firebaseUser.value?.uid);
+    
+    if (!isAuthorized) return;
+
     try {
-      if (role == 'admin') {
-        await contactController.deleteContactFromFirebaseIfAdmin(contact);
-        Get.snackbar('Success', 'Contact deleted from Firebase!');
-        Navigator.pop(context);
-      } else if (role == 'user' &&
-          contact.ownerId == authController.firebaseUser.value?.uid) {
-        await FirebaseFirestore.instance
-            .collection('contacts')
-            .doc(contact.id)
-            .delete();
-        Get.snackbar('Success', 'Contact deleted successfully!');
-        Navigator.pop(context);
-      } else {
-        Get.snackbar(
-            'Permission Denied', 'You can only delete your own contacts.');
+      // Delete from Firebase if synced
+      if (contact.isSynced) {
+        if (role == 'admin') {
+          await contactController.deleteContactFromFirebaseIfAdmin(contact);
+        } else {
+          await FirebaseFirestore.instance
+              .collection('contacts')
+              .doc(contact.id)
+              .delete();
+        }
       }
+      
+      // Always remove from local storage
+      await contactController.permanentlyDeleteContact(contact);
+      
+      Get.snackbar('Success', 'Contact deleted!');
+      Navigator.pop(context);
     } catch (e) {
       Get.snackbar('Error', 'Failed to delete contact: $e');
     }

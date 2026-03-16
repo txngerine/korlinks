@@ -38,6 +38,7 @@ class ContactController extends GetxController {
 
   var isFetching = false.obs;
   var loadingMore = false.obs;
+  var isAddingContact = false.obs;
 
   DocumentSnapshot? lastVisible;
   final int pageSize = 20000; // Start with smaller page size for faster initial load
@@ -196,10 +197,6 @@ Future<void> fetchContacts() async {
   Future<void> syncSelectedContacts() async {
   // ✅ Restrict to admins only
   if (authController.userRole.value != 'admin') {
-    Get.snackbar(
-      'Permission Denied',
-      'Only admins can sync contacts to Firebase.',
-    );
     return;
   }
 
@@ -335,6 +332,10 @@ Future<void> fetchContacts() async {
 
 
   Future<void> addContact(Contact contact) async {
+    // Prevent multiple concurrent add operations
+    if (isAddingContact.value) return;
+    isAddingContact.value = true;
+
     try {
       final user = authController.firebaseUser.value;
       if (user == null) throw Exception('User not authenticated');
@@ -373,6 +374,8 @@ Future<void> fetchContacts() async {
         'Failed to add contact: $e',
         snackPosition: SnackPosition.BOTTOM,
       );
+    } finally {
+      isAddingContact.value = false;
     }
   }
 
@@ -502,10 +505,6 @@ Future<void> fetchContacts() async {
     try {
       // ✅ Restrict to admins only
       if (authController.userRole.value != 'admin') {
-        Get.snackbar(
-          'Permission Denied',
-          'Only admins can sync contacts to Firebase.',
-        );
         return;
       }
 
@@ -661,9 +660,6 @@ Future<void> unsyncSelectedContacts() async {
       } catch (e) {
         Get.snackbar('Error', 'Failed to add contact to Firebase: $e');
       }
-    } else {
-      Get.snackbar('Permission Denied',
-          'Only admins can add contacts directly to Firebase.');
     }
   }
 
@@ -679,9 +675,6 @@ Future<void> unsyncSelectedContacts() async {
       } catch (e) {
         Get.snackbar('Error', 'Failed to delete contact from Cloud: $e');
       }
-    } else {
-      Get.snackbar('Permission Denied',
-          'Only admins can delete contacts from Cloud.');
     }
   }
 
@@ -703,9 +696,6 @@ Future<void> unsyncSelectedContacts() async {
       } catch (e) {
         Get.snackbar('Error', 'Failed to update contact in Cloud: $e');
       }
-    } else {
-      Get.snackbar(
-          'Permission Denied', 'Only admins can update contacts in Cloud.');
     }
   }
 
